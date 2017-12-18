@@ -1,0 +1,26 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: lighter;
+}
+
+.tempButton {
+  border-radius: 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  outline: none;
+}
+
+.tempButton:hover {
+  background-color: grey;
+  color: white;
+}
+
+h1 {
+  font-family: sans-serif;
+  text-align: center;
+  
+}
