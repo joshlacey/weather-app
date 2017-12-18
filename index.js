@@ -2,7 +2,7 @@ const apiEndPoint = 'http://api.aerisapi.com/forecasts/11101?client_id=' + acces
 
 let container = document.querySelector('.container')
 
-let responseObject = {}
+let responseObjects = []
 
 let shownInF = true
 
@@ -16,8 +16,8 @@ function getWeather() {
 
 function createWeatherElements(obj) {
   console.log(obj.response[0].periods)
-  responseObject = obj.response[0].periods
-  responseObject.forEach(res => {
+  responseObjects = obj.response[0].periods
+  responseObjects.forEach(res => {
     container.innerHTML += buildItem(res)
   })
 }
@@ -27,7 +27,7 @@ function buildItem(res, fahrenheit = true) {
   let minTemp = fahrenheit ? res.minTempF + '&deg;F' : res.minTempC + '&deg;C'
   let maxTemp = fahrenheit ? res.maxTempF + '&deg;F' : res.maxTempC + '&deg;C'
   let icon = res.icon
-  let dateTime = res.dateTimeISO.split('T')[0]
+  let dateTime = formatDate(res.dateTimeISO)
   return (
     `<div class="weather-item">
       <p>${dateTime}</p>
@@ -41,7 +41,15 @@ function buildItem(res, fahrenheit = true) {
 function toggleFahrenheit() {
   shownInF = !shownInF
   container.innerHTML = ''
-  responseObject.forEach(res => {
+  responseObjects.forEach(res => {
     container.innerHTML += buildItem(res, shownInF)
   })
+}
+
+function formatDate(date) {
+  dateArr = date.split(/-|T/g)
+  let year = dateArr[0]
+  let month = dateArr[1]
+  let day = dateArr[2]
+  return month +'-'+ day +'-'+ year
 }
