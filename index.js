@@ -1,6 +1,7 @@
 const apiEndPoint = 'http://api.aerisapi.com/forecasts/11101?client_id=' + accessId + '&client_secret=' + secretKey
 
 let container = document.querySelector('.container')
+let button = document.querySelector('.tempButton')
 
 let responseObjects = []
 
@@ -41,6 +42,7 @@ function buildItem(res, fahrenheit = true) {
 function toggleFahrenheit() {
   shownInF = !shownInF
   container.innerHTML = ''
+  button.innerText = shownInF ? 'Change to Celcius' : 'Change to Fahrenheit'
   responseObjects.forEach(res => {
     container.innerHTML += buildItem(res, shownInF)
   })
